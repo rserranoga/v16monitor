@@ -2,7 +2,7 @@
 
 Este proyecto muestra las **Balizas DGT V-16** activas, proporcionando su ubicación con OpenLayers.
 
-## 🔗 [Ver el Mapa(https://rserranoga.github.io/v16monitor/v16activas.html)
+## 🔗 [Ver el Mapa](https://rserranoga.github.io/v16monitor/v16activas.html)
 
 ## 🏗️ Arquitectura del Sistema
 El proyecto funciona de forma aútonoma, sin estar hospedado en GitHub.
