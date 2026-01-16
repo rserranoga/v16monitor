@@ -1,2 +1,6 @@
 runner.R
 script.R
+data/*.csv
+.Rhistory
+.RData
+.Ruserdata
