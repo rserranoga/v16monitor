@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sobre el Proyecto - Visualización de Balizas V-16 Activas</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+    <style>
+        body { background-color: #f8f9fa; color: #333; }
+        .hero-section { background: #003366; color: white; padding: 60px 0; border-bottom: 5px solid #d40000; }
+        .card { border: none; box-shadow: 0 4px 12px rgba(0,0,0,0.08); transition: transform 0.2s; }
+        .card:hover { transform: translateY(-5px); }
+        .author-badge { background-color: #e9ecef; padding: 15px; border-radius: 10px; border-left: 4px solid #003366; }
+    </style>
+</head>
+<body>
+
+    <header class="hero-section text-center">
+        <div class="container">
+            <h1 class="display-4 fw-bold">Visualización de Balizas V-16 Activas</h1>
+            <p class="lead">Un proyecto de visualización de datos en el ámbito de la seguridad vial</p>
+        </div>
+    </header>
+
+    <main class="container my-5">
+        <div class="row g-4">
+            <div class="col-md-8">
+                <div class="card p-4 mb-4">
+                    <h2 class="h3 mb-3 border-bottom pb-2">Sobre este Proyecto</h2>
+                    <p>Este sistema automatizado muestra en tiempo real las incidencias señalizadas por balizas DGT V-16 conectadas en la red vial española. Mediante la integración de la API de la DGT 3.0, procesamos y geolocalizamos cada dispositivo para ofrecer una visión clara de los puntos de riesgo en carretera.</p>
+                </div>
+
+                <div class="card p-4">
+                    <h2 class="h3 mb-3 border-bottom pb-2">Autores y Contacto</h2>
+                    <div class="author-badge mb-3">
+                        <h4 class="mb-1">Sara Helena Otal Franco</h4>
+                        <p class="text-muted mb-2">Desarrollador Principal / Analista de Datos</p>
+                        <div class="d-flex gap-3">
+                            <a href="mailto:sarah.otal@uah.es" class="text-decoration-none"><i class="bi bi-envelope-fill"></i> Email</a>
+                            <a href="https://github.com/sarah-otal" class="text-decoration-none"><i class="bi bi-github"></i> GitHub</a>
+                        </div>
+                    </div>
+                    <div class="author-badge mb-3">
+                        <h4 class="mb-1">Ramiro Serrano-Garcia</h4>
+                        <p class="text-muted mb-2">Desarrollador Principal / Analista de Datos</p>
+                        <div class="d-flex gap-3">
+                            <a href="mailto:rserranoga@gmail.com" class="text-decoration-none"><i class="bi bi-envelope-fill"></i> Email</a>
+                            <a href="https://github.com/rserranoga" class="text-decoration-none"><i class="bi bi-github"></i> GitHub</a>
+                        </div>
+                    </div>
+                    </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="card p-4 bg-light">
+                    <h3 class="h5 mb-3">Información del Sistema</h3>
+                    <p class="small text-muted mb-0"><strong>Última actualización:</strong> Enero 2026</p>
+                    <p class="small text-muted mb-3"><strong>Estado:</strong> Operativo 24/7</p>
+                    <hr>
+                    <p class="small">Este proyecto tiene fines puramente informativos y didácticos.</p>
+                    <a href="https://rserranoga.github.io/v16monitor/v16activas.html" class="btn btn-primary w-100 mt-2">Ir al Mapa en Vivo</a>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="text-center py-4 bg-dark text-white mt-5">
+        <div class="container">
+            <p class="mb-0">© 2026 Proyecto Monitor de Balizas V-16 Activas. Todos los derechos reservados.</p>
+            <small class="text-secondary">Diseñado con R, Google Cloud y GitHub Pages.</small>
+        </div>
+    </footer>
+
+</body>
+</html>
