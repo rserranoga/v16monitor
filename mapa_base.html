@@ -1,1 +1,115 @@
-<!DOCTYPE html><html><head><title>Mapa de Balizas DGT V-16 Activas</title><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/ol@v7.4.0/ol.css"><style>body{margin:0;font-family:sans-serif;}#map{width:100vw;height:100vh;background:#f8f9fa;}#header{position:absolute;top:15px;left:50%;transform:translateX(-50%);background:rgba(255,255,255,0.9);padding:12px 20px;border-radius:8px;z-index:1000;text-align:center;border:1px solid #bbb;}.ol-popup{position:absolute;background-color:white;padding:12px;border-radius:8px;border:1px solid #ccc;bottom:15px;left:-50px;min-width:280px;font-size:11px;pointer-events:none;box-shadow:0 2px 8px rgba(0,0,0,0.2);}#legend{position:absolute;bottom:30px;left:20px;z-index:1000;background:white;padding:10px;border:1px solid #bbb;font-size:11px;}.dot{height:8px;width:8px;border-radius:50%;display:inline-block;margin-right:8px;border:1.5px solid orange;}#footer-container{position:absolute;bottom:10px;right:10px;z-index:1000;display:flex;flex-direction:column;align-items:flex-end;}#search-box{width:240px;padding:8px;border:1px solid #bbb;border-radius:4px 4px 0 0;font-size:12px;outline:none;border-bottom:none;}#footer-links{background:white;padding:8px;font-size:11px;border:1px solid #bbb;width:240px;text-align:center;border-radius:0 0 4px 4px;}#footer-links a,#footer-links span{text-decoration:none;color:blue;margin-left:10px;cursor:pointer;}</style></head><body><div id="header"><div style="font-size:16px;font-weight:bold;">Balizas DGT V-16 Activas (Hora Local Madrid)</div><div style="font-size:12px;color:#333;margin-top:5px;">/*TS*/</div></div><div id="map"></div><div id="legend"><strong>Minutos Activa (Oscuro = Reciente)</strong><br><div style="display:flex;align-items:center"><span class="dot" style="background:#67000d"></span> < 15 min</div><div style="display:flex;align-items:center"><span class="dot" style="background:#a50f15"></span> 15-30 min</div><div style="display:flex;align-items:center"><span class="dot" style="background:#de2d26"></span> 30-60 min</div><div style="display:flex;align-items:center"><span class="dot" style="background:#fb6a4a"></span> 60-120 min</div><div style="display:flex;align-items:center"><span class="dot" style="background:#fcae91"></span> 120-240 min</div><div style="display:flex;align-items:center"><span class="dot" style="background:#fee5d9"></span> > 240 min</div></div><div id="footer-container"><input type="text" id="search-box" placeholder="Buscar (Provincia) o Carretera/Municipio..."><div id="footer-links"><span onclick="downloadCSV()">Download CSV</span><a href="about.html" target="_blank">About</a></div></div><div id="popup" class="ol-popup"><div id="popup-content"></div></div><script src="https://cdn.jsdelivr.net/npm/ol@v7.4.0/dist/ol.js"></script><script>const data=/*DATA*/;const fileTimestamp="/*FILETS*/";function getR(m){if(m<=15)return"#67000d";if(m<=30)return"#a50f15";if(m<=60)return"#de2d26";if(m<=120)return"#fb6a4a";if(m<=240)return"#fcae91";return"#fee5d9";}const features=data.map(d=>new ol.Feature({geometry:new ol.geom.Point(ol.proj.fromLonLat([d.lon,d.lat])),tooltip:d.Tooltip,mins:d.mins,muni:(d.Muni||"").toLowerCase().trim(),road:(d.Road||"").toLowerCase().trim(),prov:(d.Prov||"").toLowerCase().trim()}));const source=new ol.source.Vector({features:features});const map=new ol.Map({target:"map",layers:[new ol.layer.Tile({source:new ol.source.OSM()}),new ol.layer.Vector({source:source,style:f=>new ol.style.Style({image:new ol.style.Circle({radius:5,fill:new ol.style.Fill({color:getR(f.get("mins"))}),stroke:new ol.style.Stroke({color:"orange",width:1.5})})})})],view:new ol.View({center:ol.proj.fromLonLat([-3.70,40.41]),zoom:6})});document.getElementById("search-box").addEventListener("input",(e)=>{let t=e.target.value.toLowerCase().trim();let fil=t===""?features:t.startsWith("(")?features.filter(f=>f.get("prov").startsWith(t.substring(1))):features.filter(f=>f.get("muni").startsWith(t)||f.get("road").startsWith(t));source.clear();source.addFeatures(fil);});const overlay=new ol.Overlay({element:document.getElementById("popup"),autoPan:false});map.addOverlay(overlay);map.on("pointermove",e=>{const f=map.forEachFeatureAtPixel(e.pixel,feat=>feat);if(f){document.getElementById("popup-content").innerHTML=f.get("tooltip");overlay.setPosition(e.coordinate);map.getTargetElement().style.cursor="pointer";}else{overlay.setPosition(undefined);map.getTargetElement().style.cursor="";}});map.on("click",e=>{const f=map.forEachFeatureAtPixel(e.pixel,feat=>feat);if(f){map.getView().animate({center:f.getGeometry().getCoordinates(),zoom:14,duration:1000});}});function downloadCSV(){if(data.length===0)return;const h=["Municipio","Provincia","Carretera","PK","Sentido1","Sentido2","Lat","Lon"];const k=["Muni","Prov","Road","PK","Dir1","Dir2","lat","lon"];let csv="data:text/csv;charset=utf-8,"+h.join(",")+"\n";data.forEach(d=>{let r=k.map(x=>'"' + String(d[x]||"").replace(/"/g,'""') + '"');csv+=r.join(",")+"\n";});const l=document.createElement("a");l.setAttribute("href",encodeURI(csv));l.setAttribute("download",`dgt_balizas_activas_${fileTimestamp}.csv`);l.click();}</script></body></html>
+<!DOCTYPE html>
+<html>
+<head>
+    <title>DGT Balizas Map</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/ol@v7.4.0/ol.css">
+    <style>
+        body { margin: 0; font-family: sans-serif; }
+        #map { width: 100vw; height: 100vh; background: #f8f9fa; }
+        #header { position: absolute; top: 15px; left: 50%; transform: translateX(-50%); background: rgba(255,255,255,0.9); padding: 12px 20px; border-radius: 8px; z-index: 1000; text-align: center; border: 1px solid #bbb; }
+        .ol-popup { position: absolute; background-color: white; padding: 12px; border-radius: 8px; border: 1px solid #ccc; bottom: 15px; left: -50px; min-width: 280px; font-size: 11px; pointer-events: none; box-shadow: 0 2px 8px rgba(0,0,0,0.2); }
+        #legend { position: absolute; bottom: 30px; left: 20px; z-index: 1000; background: white; padding: 10px; border: 1px solid #bbb; font-size: 11px; }
+        .dot { height: 8px; width: 8px; border-radius: 50%; display: inline-block; margin-right: 8px; border: 1.5px solid orange; }
+        #footer-container { position: absolute; bottom: 10px; right: 10px; z-index: 1000; display: flex; flex-direction: column; align-items: flex-end; }
+        #search-box { width: 240px; padding: 8px; border: 1px solid #bbb; border-radius: 4px 4px 0 0; font-size: 12px; outline: none; border-bottom: none; }
+        #footer-links { background: white; padding: 8px; font-size: 11px; border: 1px solid #bbb; width: 240px; text-align: center; border-radius: 0 0 4px 4px; }
+        #footer-links a, #footer-links span { text-decoration: none; color: blue; margin-left: 10px; cursor: pointer; }
+    </style>
+</head>
+<body>
+    <div id="header">
+        <div style="font-size: 16px; font-weight: bold;">Balizas DGT V-16 Activas (Hora Local Madrid)</div>
+        <div style="font-size: 12px; color: #333; margin-top: 5px;">/*TS*/</div>
+    </div>
+    <div id="map"></div>
+    <div id="legend">
+        <strong>Minutos Activa (Oscuro = Reciente)</strong><br>
+        <div style="display:flex;align-items:center"><span class="dot" style="background:#67000d"></span> < 5 min</div>
+        <div style="display:flex;align-items:center"><span class="dot" style="background:#a50f15"></span> 5-15 min</div>
+        <div style="display:flex;align-items:center"><span class="dot" style="background:#de2d26"></span> 15-30 min</div>
+        <div style="display:flex;align-items:center"><span class="dot" style="background:#fb6a4a"></span> 30-60 min</div>
+        <div style="display:flex;align-items:center"><span class="dot" style="background:#fcae91"></span> 60-120 min</div>
+        <div style="display:flex;align-items:center"><span class="dot" style="background:#fee5d9"></span> > 120 min</div>
+    </div>
+    <div id="footer-container">
+        <input type="text" id="search-box" placeholder="Buscar (Provincia) o Carretera/Municipio...">
+        <div id="footer-links">
+            <span onclick="downloadCSV()">Download CSV</span>
+            <a href="about.html" target="_blank">About</a>
+        </div>
+    </div>
+    <div id="popup" class="ol-popup"><div id="popup-content"></div></div>
+
+    <script src="https://cdn.jsdelivr.net/npm/ol@v7.4.0/dist/ol.js"></script>
+    <script>
+        const data = /*DATA*/;
+        const fileTimestamp = "/*FILETS*/";
+        
+        function getR(m) {
+            if (m <= 5) return "#67000d"; if (m <= 15) return "#a50f15";
+            if (m <= 30) return "#de2d26"; if (m <= 60) return "#fb6a4a";
+            if (m <= 120) return "#fcae91"; return "#fee5d9";
+        }
+
+        // --- FIXED SEARCH INDEXING ---
+        const features = data.map(d => new ol.Feature({
+            geometry: new ol.geom.Point(ol.proj.fromLonLat([d.lon, d.lat])),
+            tooltip: d.Tooltip, mins: d.mins,
+            muni: (d.Muni || "").toLowerCase().trim(),
+            road: (d.Road || "").toLowerCase().trim(),
+            prov: (d.Prov || "").toLowerCase().trim()
+        }));
+
+        const source = new ol.source.Vector({ features: features });
+        const map = new ol.Map({
+            target: "map",
+            layers: [ new ol.layer.Tile({ source: new ol.source.OSM() }), 
+                      new ol.layer.Vector({ source: source, style: f => new ol.style.Style({
+                          image: new ol.style.Circle({ radius: 5, fill: new ol.style.Fill({color: getR(f.get("mins"))}), stroke: new ol.style.Stroke({color: "orange", width: 1.0}) })
+                      })}) ],
+            view: new ol.View({ center: ol.proj.fromLonLat([-3.70, 40.41]), zoom: 6 })
+        });
+
+        // REACTIVE SEARCH (STARTS WITH)
+        document.getElementById("search-box").addEventListener("input", (e) => {
+            let t = e.target.value.toLowerCase().trim();
+            let fil = t === "" ? features : 
+                      t.startsWith("(") ? features.filter(f => f.get("prov").startsWith(t.substring(1))) :
+                      features.filter(f => f.get("muni").startsWith(t) || f.get("road").startsWith(t));
+            source.clear(); source.addFeatures(fil);
+        });
+
+        // POPUP & CLICK TO ZOOM
+        const overlay = new ol.Overlay({ element: document.getElementById("popup"), autoPan: false });
+        map.addOverlay(overlay);
+        map.on("pointermove", e => {
+            const f = map.forEachFeatureAtPixel(e.pixel, feat => feat);
+            if (f) {
+                document.getElementById("popup-content").innerHTML = f.get("tooltip");
+                overlay.setPosition(e.coordinate);
+                map.getTargetElement().style.cursor = "pointer";
+            } else { overlay.setPosition(undefined); map.getTargetElement().style.cursor = ""; }
+        });
+        map.on("click", e => {
+            const f = map.forEachFeatureAtPixel(e.pixel, feat => feat);
+            if (f) { map.getView().animate({ center: f.getGeometry().getCoordinates(), zoom: 14, duration: 1000 }); }
+        });
+
+        // --- FIXED CSV DOWNLOAD ---
+        function downloadCSV() {
+            if (data.length === 0) return;
+            const headers = ["Municipio", "Provincia", "Carretera", "PK", "Sentido1", "Sentido2", "Lat", "Lon"];
+            const keys = ["Muni", "Prov", "Road", "PK", "Dir1", "Dir2", "lat", "lon"];
+            let csv = "data:text/csv;charset=utf-8," + headers.join(",") + "\n";
+            data.forEach(d => {
+                let row = keys.map(k => '"' + String(d[k] || "").replace(/"/g, '""') + '"');
+                csv += row.join(",") + "\n";
+            });
+            const link = document.createElement("a");
+            link.setAttribute("href", encodeURI(csv));
+            link.setAttribute("download", `dgt_balizas_activas_${fileTimestamp}.csv`);
+            link.click();
+        }
+    </script>
+</body>
+</html>
