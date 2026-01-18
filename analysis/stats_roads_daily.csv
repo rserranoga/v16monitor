@@ -1,14 +1,14 @@
 Prov,Road,Date,Total_Day_Count
 A Coruña,AP-9F,2026-01-17,6
-A Coruña,A-6,2026-01-18,6
+A Coruña,A-6,2026-01-18,7
 Alacant/Alicante,A-7,2026-01-17,8
 Alacant/Alicante,N-332,2026-01-18,24
 Albacete,CM-3203,2026-01-17,7
 Albacete,A-31,2026-01-18,8
 Almería,A-1050,2026-01-17,3
-Almería,A-7,2026-01-18,25
+Almería,A-7,2026-01-18,26
 Asturias,A-8,2026-01-17,11
-Asturias,A-66,2026-01-18,5
+Asturias,A-66,2026-01-18,7
 Badajoz,EX-343,2026-01-17,3
 Badajoz,EX-323,2026-01-18,6
 Barcelona,C-25,2026-01-17,3
@@ -24,11 +24,11 @@ Ceuta,N-354,2026-01-18,1
 Ciudad Real,A-4,2026-01-17,10
 Ciudad Real,N-430,2026-01-18,6
 Cuenca,N-420,2026-01-17,7
-Cuenca,A-3,2026-01-18,12
+Cuenca,A-3,2026-01-18,13
 Cáceres,EX-203,2026-01-17,3
 Cáceres,CC-253,2026-01-18,8
 Cádiz,AP-4,2026-01-17,5
-Cádiz,A-381,2026-01-18,10
+Cádiz,A-381,2026-01-18,11
 Córdoba,A-45,2026-01-17,17
 Córdoba,A-45,2026-01-18,11
 Girona,A-26,2026-01-17,1
@@ -38,7 +38,7 @@ Granada,N-340,2026-01-18,11
 Guadalajara,A-2,2026-01-17,7
 Guadalajara,A-2,2026-01-18,5
 Huelva,N-431,2026-01-17,6
-Huelva,A-49,2026-01-18,13
+Huelva,A-49,2026-01-18,15
 Huesca,A-2606,2026-01-17,3
 Huesca,A-136,2026-01-18,13
 Illes Balears,EI-600,2026-01-17,4
@@ -48,21 +48,21 @@ Jaén,A-316,2026-01-18,15
 La Rioja,LO-20,2026-01-17,1
 La Rioja,N-111,2026-01-18,4
 Las Palmas,GC-1,2026-01-17,9
-Las Palmas,GC-1,2026-01-18,11
+Las Palmas,GC-1,2026-01-18,12
 León,A-6,2026-01-17,3
 León,A-66,2026-01-18,6
 Lleida,A-2,2026-01-17,4
 Lleida,A-2,2026-01-18,3
 Lugo,A-6,2026-01-17,3
-Lugo,N-640,2026-01-18,6
+Lugo,A-6,2026-01-18,7
 Madrid,M-40,2026-01-17,24
-Madrid,M-40,2026-01-18,49
+Madrid,M-40,2026-01-18,52
 Murcia,A-7,2026-01-17,9
 Murcia,A-7,2026-01-18,10
 Málaga,A-7,2026-01-17,27
 Málaga,A-7,2026-01-18,28
 Navarra,A-12,2026-01-17,3
-Navarra,A-15,2026-01-18,5
+Navarra,A-15,2026-01-18,6
 Ourense,A-52,2026-01-17,5
 Ourense,N-120,2026-01-18,8
 Palencia,N-120,2026-01-17,2
@@ -84,7 +84,7 @@ Tarragona,T-210,2026-01-18,4
 Teruel,N-232,2026-01-17,2
 Teruel,N-232,2026-01-18,6
 Toledo,A-42,2026-01-17,12
-Toledo,A-42,2026-01-18,10
+Toledo,A-4,2026-01-18,10
 Valladolid,VA-801,2026-01-17,7
 Valladolid,A-62,2026-01-18,16
 València/Valencia,A-3,2026-01-17,10
