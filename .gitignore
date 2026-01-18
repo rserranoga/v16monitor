@@ -2,6 +2,7 @@ runner.R
 script.R
 analytics.R
 analytics_init.R
+mapa_base.html
 logs/
 *.log
 data/*.csv
