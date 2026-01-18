@@ -69,8 +69,8 @@ load_clean_data <- function(hours_back = NULL) {
 # --- 3. LÓGICA HORARIA ---
 run_hourly <- function() {
   message(paste("Iniciando análisis horario:", Sys.time()))
-  # df <- load_clean_data(hours_back = 6) # Miramos 6h atrás para asegurar cobertura
-  df <- load_clean_data(hours_back = NULL) # To populate the analysis for the first time
+  df <- load_clean_data(hours_back = 6) # Miramos 6h atrás para asegurar cobertura
+  # df <- load_clean_data(hours_back = NULL) # To populate the analysis for the first time
   
   if(is.null(df) || nrow(df) == 0) {
     return(message("No se encontraron datos en las últimas 6 horas."))
