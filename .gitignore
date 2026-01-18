@@ -1,6 +1,10 @@
 runner.R
 script.R
+analytics.R
+analytics_init.R
+logs
 data/*.csv
+analysis/*.*
 .Rhistory
 .RData
 .Ruserdata
