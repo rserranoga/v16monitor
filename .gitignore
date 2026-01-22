@@ -11,3 +11,4 @@ analysis/
 .RData
 .Ruserdata
 *.tar.gz
+*.bak
