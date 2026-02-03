@@ -11,11 +11,10 @@ El proyecto funciona de forma aútonoma, sin estar hospedado en GitHub.
 | :--- | :--- | :--- |
 | **Ingestion Engine** | R (httr, xml2) | Polls DGT XML feeds and parses IoT coordinates. |
 | **Automation** | GCP Compute Engine | E2-micro instance running a 24/7 persistent loop. |
-| **Hosting** | GitHub Pages | Serves the processed map to the public. |
+| **Hosting** | Google Cloud | Serves the processed map to the public. |
 
 ## 🛠️ Implementación
 * **Reboot Guard:** Managed via `crontab @reboot` to ensure 100% uptime.
-* **Smart Sync:** Uses `git pull --rebase -X ours` to prevent merge conflicts.
 * **Privacy:** Logic and historical data are stored privately on the VM.
 
 ## 👨‍💻 Autores
